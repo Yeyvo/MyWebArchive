@@ -1,0 +1,22 @@
+.projCard{
+  overflow: visible;
+  white-space: normal;
+  text-align: left;
+  .card-body{
+    .card-title{
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  }
+
+  .tags{
+    display: flex;
+    flex-direction: row;
+    gap: 20px ;
+    margin-left: 10px;
+    .badge{
+      font-weight: 500;
+      font-size: .8em;
+    }
+  }
+}
