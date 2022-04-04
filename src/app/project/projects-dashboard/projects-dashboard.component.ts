@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../services/project.service";
-import {Project} from "../models/project";
+import {ProjectSmall} from "../models/project";
 import {AuthService} from "../../services/auth.service";
 
 @Component({
@@ -10,7 +10,7 @@ import {AuthService} from "../../services/auth.service";
 })
 export class ProjectsDashboardComponent implements OnInit {
 
-  projects: Project[];
+  projects: ProjectSmall[];
 
   constructor(public projectService: ProjectService, private authService: AuthService) {
   }
@@ -19,4 +19,7 @@ export class ProjectsDashboardComponent implements OnInit {
     this.projects = this.projectService.getAllProjectsTeacher(this.authService['uuid']);
   }
 
+  onLoadProjectData(i: number) {
+    this.projectService.LoadProjectData(this.projects[i]['uid'])
+  }
 }

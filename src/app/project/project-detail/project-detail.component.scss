@@ -1,0 +1,46 @@
+#projectDetail {
+  h1{
+    margin-bottom: 15px;
+  }
+  .tags {
+    margin-bottom: 10px;
+    justify-content: center;
+
+    .badge {
+      font-size: 1.0rem;
+    }
+  }
+
+  .newVersion{
+
+  }
+
+  .projCard {
+    //overflow: clip;
+    white-space: normal;
+    text-align: left;
+    //text-overflow: ellipsis;
+    overflow: hidden;
+    min-height: 150px;
+
+    .card-body {
+      .card-title {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+
+    .publisher {
+      text-align: right;
+    }
+
+    @media screen and (max-width: 450px) {
+      &.btn{
+        padding: 15px !important;
+      }
+    }
+
+
+  }
+
+}

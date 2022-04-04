@@ -1,50 +1,59 @@
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
-<p>project-detail works!</p>
+<div class="container d-inline-flex flex-column" id="projectDetail">
+  <h1>{{project.name}}</h1>
+
+
+  <div class="tags">
+    <div class="badge badge-primary" *ngFor="let tag of project.tags">{{tag}}</div>
+  </div>
+
+  <p style="font-size: 1.1rem">{{project.description}}</p>
+
+  <div>
+    <p>Membres de l'equipe</p>
+    <ul class="list-unstyled">
+      <li *ngFor="let member of project.teamMembers">{{member}}</li>
+    </ul>
+  </div>
+
+  <div>
+    <button (click)="onAddVersion()" class="btn btn-primary btn-lg float-end mb-4">ajouter une version</button>
+  </div>
+
+
+
+  <p-timeline [value]="project.versions" align="alternate">
+    <ng-template pTemplate="content" let-version>
+      <div class="card btn projCard " routerLink="/projects/detailProject"
+           (click)="onOpenCard(version.versionNumber, (project['versions'].indexOf(version)))"
+      >
+        <div class="card-body">
+          <h2 class="card-title">{{version.versionNumber}}</h2>
+          <p class="card-text">{{version.datePush | date: 'short'}}</p>
+          <p class="card-text">{{version.modifications}}</p>
+        </div>
+        <div class="publisher"> {{version.publisherUID}}</div>
+      </div>
+
+      <p-dialog header="Version :   {{version.versionNumber}}" [dismissableMask]="true" [(visible)]="display[project['versions'].indexOf(version)]" [style]="{width: '50vw'}">
+
+        <button type="button" class="btn btn-primary float-end" (click)="downloadVersion(version.dataURL)" ><fa-icon [icon]="faDownload"></fa-icon> Download</button>
+
+        <app-comment *ngFor="let comment of version.comments" [authorName]="comment.publisherUID"
+              [imageSrc]="src"
+              [comment]="comment.data"
+        ></app-comment>
+
+
+        <div class="form-group">
+          <label for="comment"> Commentaire :</label>
+        <input #Comment  class="form-control" id="comment"
+               (keyup.enter)="addComment(Comment.value, (project['versions'].indexOf(version)))"  placeholder="Type comment...">
+        </div>
+        <button type="button" class="btn btn-primary float-end" (click)="addComment(Comment.value, (project['versions'].indexOf(version)))">Add</button>
+      </p-dialog>
+
+
+    </ng-template>
+  </p-timeline>
+
+</div>

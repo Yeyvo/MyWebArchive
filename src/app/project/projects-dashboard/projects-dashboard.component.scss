@@ -1,7 +1,11 @@
 .projCard{
-  overflow: visible;
+  //overflow: clip;
   white-space: normal;
   text-align: left;
+  //text-overflow: ellipsis;
+  overflow: hidden;
+  min-height: 150px;
+
   .card-body{
     .card-title{
       font-size: 1.5em;
@@ -9,14 +13,4 @@
     }
   }
 
-  .tags{
-    display: flex;
-    flex-direction: row;
-    gap: 20px ;
-    margin-left: 10px;
-    .badge{
-      font-weight: 500;
-      font-size: .8em;
-    }
-  }
 }

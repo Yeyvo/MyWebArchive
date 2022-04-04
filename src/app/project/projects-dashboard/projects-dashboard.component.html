@@ -1,6 +1,7 @@
+<div class="container">
 <div class="row">
-  <div class="col-sm-6" *ngFor="let project of projects">
-    <div class="card btn projCard" routerLink="/">
+  <div class="col-sm-6" *ngFor="let project of projects; let i = index">
+    <div class="card btn projCard" routerLink="/projects/detailProject" (click)="onLoadProjectData(i)">
       <div class="card-body">
         <h5 class="card-title">{{project.name}}</h5>
         <p class="card-text">{{project.description}}</p>
@@ -10,4 +11,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

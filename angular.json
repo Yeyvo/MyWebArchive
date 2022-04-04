@@ -31,6 +31,9 @@
 						],
 						"styles": [
 							"./node_modules/bootstrap/dist/css/bootstrap.css",
+							"node_modules/primeicons/primeicons.css",
+							"node_modules/primeng/resources/primeng.css",
+							"node_modules/primeng/resources/themes/arya-purple/theme.css",
 							"src/styles.scss",
 							"src/assets/scss/black-dashboard.scss",
 							"src/assets/css/nucleo-icons.css",

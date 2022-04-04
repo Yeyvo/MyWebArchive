@@ -10,6 +10,7 @@ import {FooterComponent} from "./components/includes/footer/footer.component";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {appRoutes} from "./routes.app.component";
 import { ProjectComponent } from './project/project.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ProjectComponent } from './project/project.component';
     NavbarComponent,
     FooterComponent,
     ProjectsDashboardComponent,
-    ProjectComponent
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +28,12 @@ import { ProjectComponent } from './project/project.component';
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: true} // <-- debugging purposes only
-    )
+    ),
+    BrowserAnimationsModule
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
