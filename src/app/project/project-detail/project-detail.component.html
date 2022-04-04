@@ -1,4 +1,4 @@
-<div class="container d-inline-flex flex-column" id="projectDetail">
+<div class="container d-flex flex-column" id="projectDetail">
   <h1>{{project.name}}</h1>
 
 
@@ -8,10 +8,10 @@
 
   <p style="font-size: 1.1rem">{{project.description}}</p>
 
-  <div>
-    <p>Membres de l'equipe</p>
-    <ul class="list-unstyled">
-      <li *ngFor="let member of project.teamMembers">{{member}}</li>
+  <div class="d-flex gap-5 align-items-center members">
+    <p class="m-0">Membres de l'equipe</p>
+    <ul class="list-unstyled m-0">
+      <li *ngFor="let member of teamMembers"> <img class="" [src]="member.ImageURL" alt="avatar" width="25" height="25" /> {{member.displayName}}</li>
     </ul>
   </div>
 
@@ -31,15 +31,15 @@
           <p class="card-text">{{version.datePush | date: 'short'}}</p>
           <p class="card-text">{{version.modifications}}</p>
         </div>
-        <div class="publisher"> {{version.publisherUID}}</div>
+        <div class="publisher"> <img [src]="getUserFromArrayByUIDOrDatabase(version.publisherUID, teamMembers).ImageURL" alt="avatar" width="25" height="25" />  {{getUserFromArrayByUIDOrDatabase(version.publisherUID, teamMembers).displayName}}</div>
       </div>
 
       <p-dialog header="Version :   {{version.versionNumber}}" [dismissableMask]="true" [(visible)]="display[project['versions'].indexOf(version)]" [style]="{width: '50vw'}">
 
         <button type="button" class="btn btn-primary float-end" (click)="downloadVersion(version.dataURL)" ><fa-icon [icon]="faDownload"></fa-icon> Download</button>
 
-        <app-comment *ngFor="let comment of version.comments" [authorName]="comment.publisherUID"
-              [imageSrc]="src"
+        <app-comment *ngFor="let comment of version.comments" [authorName]="getUserFromArrayByUIDOrDatabase(comment.publisherUID, teamMembers).displayName"
+              [imageSrc]="getUserFromArrayByUIDOrDatabase(comment.publisherUID, teamMembers).ImageURL"
               [comment]="comment.data"
         ></app-comment>
 

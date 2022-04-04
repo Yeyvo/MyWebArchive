@@ -11,6 +11,12 @@
     }
   }
 
+  .members{
+    ul > li:nth-child(n+1){
+      margin-top: 8px;
+    }
+  }
+
   .newVersion{
 
   }

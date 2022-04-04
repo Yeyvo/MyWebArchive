@@ -42,7 +42,7 @@ export class ProjectService {
 
       'uid': 'e6f955ze6dd262',
       'name': 'XML-project',
-      'teamMembers': ['16511', '654664'],
+      'teamMembers': ['00000', '654664'],
       'description': "un systeme de gestion de version de projet",
       'tags': ['XML', 'SPRING'],
       versions: [{

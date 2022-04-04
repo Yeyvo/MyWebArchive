@@ -3,6 +3,8 @@ import {ProjectService} from "../services/project.service";
 import {ProjectBig} from "../models/project";
 import {PrimeIcons} from "primeng/api";
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import {User} from "../../models/User";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-project-detail',
@@ -20,8 +22,9 @@ export class ProjectDetailComponent implements OnInit {
   src: String = "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp";
   faDownload = faDownload;
 
+  teamMembers : User[];
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, private userService: UsersService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +35,8 @@ export class ProjectDetailComponent implements OnInit {
       this.display.push(false)
     }
 
+    this.loadTeamMembersData()
+    console.log('teamMember :' , this.teamMembers)
   }
 
   onOpenCard(versionNumber: any, index: number) {
@@ -65,5 +70,18 @@ export class ProjectDetailComponent implements OnInit {
     document.body.appendChild(link);
     link.click();
     link.remove();
+  }
+
+
+  private loadTeamMembersData() {
+    this.teamMembers = this.userService.getUsersDataInArray(this.project.teamMembers)
+  }
+
+  getUserFromArrayByUIDOrDatabase(uid:string, team : User[]) : User{
+    let res = team.filter(value => value.uid ===uid)[0]
+    if(res === undefined){
+      res = this.userService.getuserByUID(uid);
+    }
+    return res
   }
 }

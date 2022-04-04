@@ -3,4 +3,6 @@ export interface User{
   email: string;
   displayName?: string;
   permissionLevel?: number;
+  ImageURL?: string;
+  isTeacher: boolean;
 }
