@@ -16,6 +16,7 @@ export class ProjectDetailComponent implements OnInit {
   project: ProjectBig;
 
   display: boolean[] = [];
+  newVersionDisplay : boolean = false;
 
   currentVersion: string = null;
   test: String = "knqlbksblqbsqbslbc sojsjpsjscnsco";
@@ -23,6 +24,7 @@ export class ProjectDetailComponent implements OnInit {
   faDownload = faDownload;
 
   teamMembers : User[];
+
 
   constructor(private projectService: ProjectService, private userService: UsersService) {
   }
@@ -40,7 +42,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onOpenCard(versionNumber: any, index: number) {
-    if (!this.isAlredyOpened()) {
+    if (!this.isAlreadyOpened()) {
       this.display[index] = true;
       this.currentVersion = versionNumber;
 
@@ -59,8 +61,8 @@ export class ProjectDetailComponent implements OnInit {
     }
   }
 
-  isAlredyOpened() {
-    return this.display.indexOf(true) !== -1;
+  isAlreadyOpened() {
+    return this.display.indexOf(true) !== -1 || this.newVersionDisplay == true;
   }
 
   downloadVersion(url){
@@ -83,5 +85,9 @@ export class ProjectDetailComponent implements OnInit {
       res = this.userService.getuserByUID(uid);
     }
     return res
+  }
+
+  onOpenAddVersion() {
+    this.newVersionDisplay = true
   }
 }

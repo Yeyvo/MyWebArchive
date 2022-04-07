@@ -1,0 +1,22 @@
+#fileUpload {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  .file-input {
+    display: none;
+  }
+
+  .upload-btn {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+}

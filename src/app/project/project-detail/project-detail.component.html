@@ -15,8 +15,21 @@
     </ul>
   </div>
 
+  <p-dialog header="Ajouter une version " [dismissableMask]="true" [(visible)]="newVersionDisplay" [style]="{width: '50vw'}">
+
+
+    <div class="form-group">
+      <!--          <label for="comment"> Commentaire :</label>-->
+      <app-file-upload class="m-4"></app-file-upload>
+      <input  class="form-control mb-3" id="versionName" placeholder="Entrez un numero de version valide ...">
+      <input  class="form-control" id="Description" placeholder="Entrez une description de la version ...">
+    </div>
+    <button type="button" class="btn btn-primary float-end" (click)="onAddVersion()">Add</button>
+  </p-dialog>
+
+
   <div>
-    <button (click)="onAddVersion()" class="btn btn-primary btn-lg float-end mb-4">ajouter une version</button>
+    <button (click)="onOpenAddVersion()" class="btn btn-primary btn-lg float-end mb-4">ajouter une version</button>
   </div>
 
 
@@ -45,7 +58,7 @@
 
 
         <div class="form-group">
-          <label for="comment"> Commentaire :</label>
+<!--          <label for="comment"> Commentaire :</label>-->
         <input #Comment  class="form-control" id="comment"
                (keyup.enter)="addComment(Comment.value, (project['versions'].indexOf(version)))"  placeholder="Type comment...">
         </div>

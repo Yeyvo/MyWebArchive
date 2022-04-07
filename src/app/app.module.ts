@@ -9,8 +9,9 @@ import {NavbarComponent} from "./components/includes/navbar/navbar.component";
 import {FooterComponent} from "./components/includes/footer/footer.component";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {appRoutes} from "./routes.app.component";
-import { ProjectComponent } from './project/project.component';
+import {ProjectComponent} from './project/project.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FooterComponent,
     ProjectsDashboardComponent,
     ProjectComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
       appRoutes,
       {enableTracing: true} // <-- debugging purposes only
     ),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
+
   ],
   providers: [],
   exports: [
