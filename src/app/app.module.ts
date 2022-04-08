@@ -12,6 +12,9 @@ import {appRoutes} from "./routes.app.component";
 import {ProjectComponent} from './project/project.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import {HttpClientModule} from "@angular/common/http";
     FooterComponent,
     ProjectsDashboardComponent,
     ProjectComponent,
+    FourOhFourComponent,
+    LoginComponent,
+    ProfileComponent,
 
   ],
   imports: [
