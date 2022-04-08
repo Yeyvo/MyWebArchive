@@ -58,7 +58,22 @@
   }
 
 
+  .projCard{
+    //overflow: clip;
+    white-space: normal;
+    text-align: left;
+    //text-overflow: ellipsis;
+    overflow: hidden;
+    min-height: 150px;
 
+    .card-body{
+      .card-title{
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+
+  }
 
   .centerText {
     text-align: center;

@@ -92,4 +92,8 @@ export class ProjectService {
   addComment(currentVersion: string, comment: string) {
     console.log(currentVersion, comment)
   }
+
+  getAllProjectsStudent(uid: string) {
+    return [this.testProject,this.testProject,this.testProject2];
+  }
 }
