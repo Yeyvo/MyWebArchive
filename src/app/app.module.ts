@@ -38,7 +38,7 @@ import { ProfileComponent } from './components/profile/profile.component';
       {enableTracing: true} // <-- debugging purposes only
     ),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
 
   ],
   providers: [],
