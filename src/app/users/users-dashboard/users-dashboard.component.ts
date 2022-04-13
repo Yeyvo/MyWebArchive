@@ -6,20 +6,20 @@ import {MatTableDataSource} from '@angular/material/table';
 export interface UserData {
   id: string;
   name: string;
-  progress: string;
-  fruit: string;
+  statut: string;
+  email: string;
 }
 
 /** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
+const EMAILS: string[] = [
+  'a@gmail.com',
+  'b@gmail.com',
+  'c@gmail.com',
+  'd@gmail.com',
+  'e@gmail.com',
+  'f@gmail.com',
+  'g@gmail.com',
+  'h@gmail.com',
 ];
 const NAMES: string[] = [
   'Maia',
@@ -42,6 +42,10 @@ const NAMES: string[] = [
   'Thomas',
   'Elizabeth',
 ];
+const STATUTS: string[] = [
+  'Etudiant',
+  'Enseignant',
+];
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -52,7 +56,7 @@ const NAMES: string[] = [
 })
 export class UsersDashboardComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+  displayedColumns: string[] = ['id', 'name', 'statut', 'email'];
   dataSource: MatTableDataSource<UserData>;
 
   clickedRows = new Set<UserData>();
@@ -102,7 +106,8 @@ function createNewUser(id: number): UserData {
   return {
     id: id.toString(),
     name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+    //statut: Math.round(Math.random() * 100).toString(),
+    statut: STATUTS[Math.round(Math.random() * (STATUTS.length - 1))],
+    email: EMAILS[Math.round(Math.random() * (EMAILS.length - 1))],
   };
 }
