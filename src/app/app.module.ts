@@ -15,7 +15,20 @@ import {HttpClientModule} from "@angular/common/http";
 import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { StudentsComponent } from './students/students.component';
+import { StudentsDashboardComponent } from './students/students-dashboard/students-dashboard.component';
+import { UsersComponent } from './users/users.component';
+import { UsersDashboardComponent } from './users/users-dashboard/users-dashboard.component';
 
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from '@angular/material/input';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
+ import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +40,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     FourOhFourComponent,
     LoginComponent,
     ProfileComponent,
+    StudentsComponent,
+    StudentsDashboardComponent,
+    UsersComponent,
+    UsersDashboardComponent,
 
   ],
   imports: [
@@ -39,7 +56,14 @@ import { ProfileComponent } from './components/profile/profile.component';
     ),
     BrowserAnimationsModule,
     HttpClientModule,
-
+    MatPaginatorModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatButtonToggleModule
   ],
   providers: [],
   exports: [

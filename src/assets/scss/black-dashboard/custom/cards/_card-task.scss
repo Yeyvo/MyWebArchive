@@ -1,14 +1,15 @@
 .card-tasks {
-  height: 473px;
+  height: 280px;
+  margin-bottom: 0%;
 
   .table-full-width {
-    max-height: 410px;
+    max-height: 250px;
     position: relative;
   }
 
   .card-header {
     .title {
-      margin-right: 20px;
+      margin-right: 0px;
       font-weight: $font-weight-normal;
     }
 

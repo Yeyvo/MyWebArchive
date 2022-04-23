@@ -1,33 +1,26 @@
 .content{
-  padding-left: 0% !important;
-  padding-right: 5% !important;
-  padding-top: 0% !important;
-  padding-bottom: -20% !important;
+  margin-bottom: -8%;
 }
-table,mat-table {
+.card{
+  margin-bottom: 1%;
+}
+table {
   width: 100%;
-
 }
+
 div{
   margin-left: 2%;
   margin-right: 2%;
 }
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-h1{
+h2{
   margin-top: 2%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  font-size: xx-large;
+  font-size: x-large;
   font-weight: bolder;
   display:inline-block;
-}
-td, th {
-  width: 25%;
 }
 mat-label{
   font-size: 17px;
@@ -37,7 +30,19 @@ input{
 }
 table, mat-paginator{
   background-color: #525f7f;
-
+}
+// td, th {
+//   width: 25%;
+// }
+.mat-form-field { 
+  font-size: 14px;
+   width: 100%;
+ }
+.content{
+  padding-left: 0% !important;
+  padding-right: 5% !important;
+  padding-top: 0% !important;
+  padding-bottom: -20% !important;
 }
 .mat-paginator{
   margin-bottom: 2%;
@@ -53,18 +58,28 @@ table, mat-paginator{
   font-size: 12px;
   color:#FFFFFF;
 }
+
 .mat-row .mat-cell {
   border-bottom: 5px solid transparent;
   border-top: 5px solid transparent;
   cursor: pointer;
+  width: 10%;
 }
 
 .mat-row:hover .mat-cell {
   border-color: #8965e0;
   background-color: #8965e0;
 }
+.button-container {
+  display: flex;
+  justify-content: right;
+  //width: 12px;
+  margin :10px;
 
-.demo-row-is-clicked {
-  font-weight: bold;
-  background-color: #8965e0;
 }
+.mat-mini-fab{
+  
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
