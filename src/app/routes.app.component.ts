@@ -10,14 +10,7 @@ export const appRoutes: Routes = [
     path: 'projects',
     loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)
   },
-  {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
-  },
-  {
-    path: 'students',
-    loadChildren: () => import('./students/students.module').then(m => m.UsersModule)
-  },
+
 
   {path: 'profile', component: ProfileComponent},
   {path: 'login', component: LoginComponent},

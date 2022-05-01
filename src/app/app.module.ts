@@ -13,12 +13,11 @@ import {ProjectComponent} from './project/project.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { StudentsComponent } from './students/students.component';
-import { StudentsDashboardComponent } from './students/students-dashboard/students-dashboard.component';
-import { UsersComponent } from './users/users.component';
-import { UsersDashboardComponent } from './users/users-dashboard/users-dashboard.component';
+
+
 
 
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -27,8 +26,14 @@ import {MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
- import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
+import {MatCheckboxModule} from '@angular/material/checkbox';
+ import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
+// import { UtilisateursListComponent } from './utilisateurs/utilisateurs-list/utilisateurs-list.component';
+// import { UtilisateursDetailComponent } from './utilisateurs/utilisateurs-detail/utilisateurs-detail.component';
+import { UtilisateursModule } from './utilisateurs/utilisateurs.module';
+import {UtilisateursListComponent} from "./utilisateurs/utilisateurs-list/utilisateurs-list.component";
+import {UtilisateursDetailComponent} from "./utilisateurs/utilisateurs-detail/utilisateurs-detail.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,10 +45,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     FourOhFourComponent,
     LoginComponent,
     ProfileComponent,
-    StudentsComponent,
-    StudentsDashboardComponent,
-    UsersComponent,
-    UsersDashboardComponent,
+    UtilisateursListComponent,
+    //UtilisateursDetailComponent,
 
   ],
   imports: [
@@ -63,7 +66,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatIconModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    UtilisateursModule,
   ],
   providers: [],
   exports: [
