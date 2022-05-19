@@ -1,0 +1,61 @@
+<div class="container">
+  <form [formGroup]="angForm" novalidate (ngSubmit)="submitForm()">
+
+    <!--nom complet-->
+    <div class="form-group">
+      <label>Nom complet:</label>
+      <input class="form-control" formControlName="nomcomplet" type="text">
+    </div>
+    <div
+      *ngIf="angForm.controls['nomcomplet'].invalid && (angForm.controls['nomcomplet'].dirty || angForm.controls['nomcomplet'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['nomcomplet'].errors?.['required']">
+        Nom complet is required.
+      </div>
+    </div>
+    <!-- email -->
+    <div class="form-group">
+      <label>Email:</label>
+      <input class="form-control" formControlName="email" type="text">
+    </div>
+    <div
+      *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['email'].errors?.['required']">
+        Email is required.
+      </div>
+    </div>
+    <!--statut -->
+    <div class="form-group">
+      <label style="margin-right:30px">Statut:</label>
+      <input style="margin-right:10px" [value]="1" [(ngModel)]="isVisible" id="Professeur" type="radio"
+        value="Professeur" name="statut" formControlName="statut" [checked]="isSelected" />
+      <label style="margin-right:30px" for="Professeur">Professeur</label>
+      <input style="margin-right:10px" [value]="0" [(ngModel)]="isVisible" id="Etudiant(e)" type="radio"
+        value="Etudiant(e)" name="statut" formControlName="statut" [checked]="!isSelected">
+      <label style="margin-right:30px" for="Etudiant(e)">Etudiant</label>
+    </div>
+    <div
+      *ngIf="angForm.controls['statut'].invalid && (angForm.controls['statut'].dirty || angForm.controls['statut'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['statut'].errors?.['required']">
+        Statut is required.
+      </div>
+    </div>
+    <!-- promotion -->
+      <div class="form-group" *ngIf="isVisible == 0">
+        <label>Promotion:</label>
+        <input class="form-control" formControlName="promotion" type="text">
+      </div>
+      <div *ngIf="angForm.controls['promotion'].invalid   " class="alert alert-danger">
+        <div *ngIf="angForm.controls['promotion'].errors?.['required'] ">
+          Promotion is required.
+        </div>
+      </div>
+   
+    <button type="submit" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-success" (click)="add('test')">
+      Ajouter
+    </button>
+  </form>
+  <br />
+</div>

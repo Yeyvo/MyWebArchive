@@ -34,6 +34,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UtilisateursModule } from './utilisateurs/utilisateurs.module';
 import {UtilisateursListComponent} from "./utilisateurs/utilisateurs-list/utilisateurs-list.component";
 import {UtilisateursDetailComponent} from "./utilisateurs/utilisateurs-detail/utilisateurs-detail.component";
+import {DialogModule} from "primeng/dialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,26 +50,27 @@ import {UtilisateursDetailComponent} from "./utilisateurs/utilisateurs-detail/ut
     //UtilisateursDetailComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    // RouterModule,
-    NgbModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: true} // <-- debugging purposes only
-    ),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    UtilisateursModule,
-  ],
+    imports: [
+        BrowserModule,
+        // RouterModule,
+        NgbModule,
+        RouterModule.forRoot(
+            appRoutes,
+            {enableTracing: true} // <-- debugging purposes only
+        ),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        UtilisateursModule,
+        DialogModule,
+    ],
   providers: [],
   exports: [
   ],

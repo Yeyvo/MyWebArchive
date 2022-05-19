@@ -18,9 +18,15 @@ export class UtilisateursListComponent implements OnInit {
 
   utilisateurs$!: Observable<Utilisateurs[]>;
   selectedId = 0;
+  users :Utilisateurs[];
 
+  newVersionDisplay : boolean = false;
+
+  onOpenAddVersion() {
+    this.newVersionDisplay = true
+  }
   constructor(
-    private service: UtilisateurService,
+    private UtilisateurService: UtilisateurService,
     private route: ActivatedRoute
   ) {}
 
@@ -28,7 +34,7 @@ export class UtilisateursListComponent implements OnInit {
     this.utilisateurs$ = this.route.paramMap.pipe(
       switchMap(params => {
         this.selectedId = parseInt(params.get('id')!, 10);
-        return this.service.getUtilisateurs();
+        return this.UtilisateurService.getUtilisateurs();
       })
     );
   }
@@ -66,11 +72,12 @@ export class UtilisateursListComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
-
-  /** show details of user */
-  showdetails(){
-    //this.router.navigateByUrl('./users-dashboard.component.html');
-    //this.router.navigate(['/userdetail']);
-    console.log('res');
+  /** get all users from server */
+  getUsers(): void {
+    this.UtilisateurService.getAllUtilisateurs()
+    .subscribe(users => this.users = users);
   }
+  /**import data from server */
+  /**export data from server */
+  /**Delete user from server */
 }
