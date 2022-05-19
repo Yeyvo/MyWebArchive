@@ -1,7 +1,16 @@
 export interface Utilisateurs {
-    id: number;
-    name: string;
-    status: string;
     email : string;
-    password: string;
+    displayName: string;
+    imageUrl: string;
+    mle: string;
+    type: string;
+    niveauetudes: string;
   }
+
+  // private String uid;
+	// private String email;
+	// private String displayName;
+	// private String imageUrl;
+	// private String mle;
+	// private String type;
+	// private String niveauetudes;

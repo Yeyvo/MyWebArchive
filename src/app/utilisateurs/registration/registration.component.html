@@ -43,17 +43,28 @@
       </div>
     </div>
     <!-- promotion -->
-      <div class="form-group" *ngIf="isVisible == 0">
-        <label>Promotion:</label>
-        <input class="form-control" formControlName="promotion" type="text">
+    <div class="form-group" *ngIf="isVisible == 0">
+      <label>Promotion:</label>
+      <input class="form-control" formControlName="promotion" type="text">
+    </div>
+    <div *ngIf="angForm.controls['promotion'].invalid   " class="alert alert-danger">
+      <div *ngIf="angForm.controls['promotion'].errors?.['required'] ">
+        Promotion is required.
       </div>
-      <div *ngIf="angForm.controls['promotion'].invalid   " class="alert alert-danger">
-        <div *ngIf="angForm.controls['promotion'].errors?.['required'] ">
-          Promotion is required.
-        </div>
+    </div>
+    <!--matricule-->
+    <!-- promotion -->
+    <div class="form-group" *ngIf="isVisible == 0">
+      <label>Matricule:</label>
+      <input class="form-control" formControlName="matricule" type="text">
+    </div>
+    <div *ngIf="angForm.controls['matricule'].invalid   " class="alert alert-danger">
+      <div *ngIf="angForm.controls['matricule'].errors?.['required'] ">
+        Matricule is required.
       </div>
-   
-    <button type="submit" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-success" (click)="add('test')">
+    </div>
+
+    <button type="submit" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-success">
       Ajouter
     </button>
   </form>

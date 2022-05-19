@@ -27,10 +27,10 @@ export class UtilisateurService {
     return of(UTIISATEURS);
   }
 
-  getUtilisateur(id: number | string) {
+  getUtilisateur(email: string) {
     return this.getUtilisateurs().pipe(
       // (+) before `id` turns the string into a number
-      map((utilisateurs: Utilisateurs[]) => utilisateurs.find(Utilisateurs => Utilisateurs.id === +id)!)
+      map((utilisateurs: Utilisateurs[]) => utilisateurs.find(Utilisateurs => Utilisateurs.email === email)!)
     );
   }
 
@@ -55,7 +55,7 @@ export class UtilisateurService {
   /** POST: add a new user to the server */
   addUtilisateur(utilisateurs: Utilisateurs): Observable<Utilisateurs> {
     return this.http.post<Utilisateurs>(this.usersUrl, utilisateurs, this.httpOptions).pipe(
-      tap((newuser: Utilisateurs) => this.log(`added user w/ id=${newuser.id}`)),
+      tap((newuser: Utilisateurs) => this.log(`added user w/ email=${newuser.email}`)),
       catchError(this.handleError<Utilisateurs>('addUser'))
     );
   }
@@ -63,20 +63,35 @@ export class UtilisateurService {
   /** PUT: update the user on the server */
   updateUtilisateurs(utilisateurs: Utilisateurs): Observable<any> {
     return this.http.put(this.usersUrl, utilisateurs, this.httpOptions).pipe(
-      tap(_ => this.log(`updated user id=${utilisateurs.id}`)),
+      tap(_ => this.log(`updated user id=${utilisateurs.email}`)),
       catchError(this.handleError<any>('updateUser'))
     );
   }
 
 
   /** DELETE: delete the user from the server */
-  deleteUtilisateur(id: number): Observable<Utilisateurs> {
-    const url = `${this.usersUrl}/${id}`;
+  deleteUtilisateur(email: string): Observable<Utilisateurs> {
+    const url = `${this.usersUrl}/${email}`;
     return this.http.delete<Utilisateurs>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted user id=${id}`)),
+      tap(_ => this.log(`deleted user email=${email}`)),
       catchError(this.handleError<Utilisateurs>('deleteUser'))
     );
   }
+
+  /** upload file */
+  // Returns an observable
+  upload(file):Observable<Utilisateurs> {
+  
+    // Create form data
+    const formData = new FormData(); 
+      
+    // Store form name as "file" with file data
+    formData.append("file", file, file.name);
+      
+    // Make http post request over api
+    // with formData as req
+    return this.http.post<Utilisateurs>(this.usersUrl, formData)
+}
 
   /**
    * Handle Http operation that failed.

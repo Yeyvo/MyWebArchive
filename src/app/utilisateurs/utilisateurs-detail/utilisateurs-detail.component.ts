@@ -23,7 +23,7 @@ export class UtilisateursDetailComponent implements OnInit {
   ngOnInit() {
     this.utilisateur$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.service.getUtilisateur(params.get('id')!))
+        this.service.getUtilisateur(params.get('email')!))
     );
   }
 

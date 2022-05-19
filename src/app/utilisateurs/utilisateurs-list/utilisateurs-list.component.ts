@@ -1,14 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-
+import * as XLSX from 'xlsx';
 import { Utilisateurs } from '../utilisateurs';
-import {UtilisateurService} from '../utilisateurs.service';
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {UTIISATEURS} from "../mock-utilisateurs";
-import {SelectionModel} from "@angular/cdk/collections";
+import { UtilisateurService } from '../utilisateurs.service';
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
+import { UTIISATEURS } from "../mock-utilisateurs";
+import { SelectionModel } from "@angular/cdk/collections";
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-utilisateurs-list',
   templateUrl: './utilisateurs-list.component.html',
@@ -17,31 +18,37 @@ import {SelectionModel} from "@angular/cdk/collections";
 export class UtilisateursListComponent implements OnInit {
 
   utilisateurs$!: Observable<Utilisateurs[]>;
+  users: Utilisateurs[] = [];
   selectedId = 0;
-  users :Utilisateurs[];
-
-  newVersionDisplay : boolean = false;
-
-  onOpenAddVersion() {
-    this.newVersionDisplay = true
-  }
-  constructor(
-    private UtilisateurService: UtilisateurService,
-    private route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
-    this.utilisateurs$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        this.selectedId = parseInt(params.get('id')!, 10);
-        return this.UtilisateurService.getUtilisateurs();
-      })
-    );
-  }
-  displayedColumns: string[] =['select','id','name','status','details'];
+  newVersionDisplay: boolean = false;
+  displayedColumns: string[] = ['displayName', 'email', 'type', 'status', 'details'];
   dataSource = new MatTableDataSource(UTIISATEURS);
   selection = new SelectionModel<Utilisateurs>(true, []);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+ 
+  constructor(
+    private UtilisateurService: UtilisateurService,
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) { }
+
+  ngOnInit(): void {
+    this.getUtilisateurs();
+    // this.utilisateurs$ = this.route.paramMap.pipe(
+    //   switchMap(params => {
+    //     this.selectedId = parseInt(params.get('id')!, 10);
+    //     return this.UtilisateurService.getUtilisateurs();
+    //   })
+    // );
+  }
+
+  getUtilisateurs(): void {
+    this.UtilisateurService.getAllUtilisateurs()
+      .subscribe(utilisateurs => this.users = utilisateurs);
+  }
+
+
+  /** design */
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -70,14 +77,42 @@ export class UtilisateursListComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.email + 1}`;
   }
-  /** get all users from server */
-  getUsers(): void {
-    this.UtilisateurService.getAllUtilisateurs()
-    .subscribe(users => this.users = users);
+  onOpenAddVersion() {
+    this.newVersionDisplay = true
   }
-  /**import data from server */
-  /**export data from server */
-  /**Delete user from server */
+
+  /**export */
+  fileName = 'ExcelSheet.xlsx';
+
+  exportexcel(): void {
+    /* table id is passed over here */
+    let element = document.getElementById('tableName');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+  }
+  /** upload file */
+  // OnClick of button Upload
+  file: File = null; // Variable to store file
+  onFileSelected(event:any) {
+      if (event.target.files.length > 0) {
+        this.file = event.target.files[0];
+        console.log(this.file);
+        this.onUpload();
+      }
+    } 
+    // OnClick of button Upload
+    onUpload() {
+      console.log(this.file);
+      this.UtilisateurService.upload(this.file).subscribe(
+          (event: any) => {     }
+      );
+  }
 }
