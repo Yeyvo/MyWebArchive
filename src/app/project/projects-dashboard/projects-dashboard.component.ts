@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../services/project.service";
-import {ProjectSmall} from "../models/project";
 import {AuthService} from "../../services/auth.service";
+import {Project} from "../models/project";
 
 @Component({
   selector: 'app-projects-dashboard',
@@ -10,7 +10,24 @@ import {AuthService} from "../../services/auth.service";
 })
 export class ProjectsDashboardComponent implements OnInit {
 
-  projects: ProjectSmall[];
+  items = [
+    {id: 1, name: 'Python'},
+    {id: 2, name: 'Node Js'},
+    {id: 3, name: 'Java'},
+    {id: 4, name: 'PHP', disabled: true},
+    {id: 5, name: 'Django'},
+    {id: 6, name: 'Angular'},
+    {id: 7, name: 'Vue'},
+    {id: 8, name: 'ReactJs'},
+  ];
+  selected = [
+    {id: 2, name: 'Node Js'},
+    {id: 8, name: 'ReactJs'}
+  ];
+
+
+  projects: Project[];
+  newProject: boolean = false;
 
   constructor(public projectService: ProjectService, private authService: AuthService) {
   }
@@ -21,5 +38,13 @@ export class ProjectsDashboardComponent implements OnInit {
 
   onLoadProjectData(i: number) {
     this.projectService.LoadProjectData(this.projects[i]['uid'])
+  }
+
+  onOpenAddProject() {
+    this.newProject = true
+  }
+
+  onAddProject() {
+
   }
 }

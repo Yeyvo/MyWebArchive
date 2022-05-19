@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ProjectBig, ProjectSmall} from "../models/project";
+import {Project} from "../models/project";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  testProject: ProjectSmall = {
+  testProject: Project = {
     'uid': 'e6f955ze6dd262',
     'name': 'XML-project',
     'teamMembers': ['16511', '654664'],
@@ -14,7 +14,7 @@ export class ProjectService {
     'tags': ['XML', 'SPRING']
   };
 
-  testProject2: ProjectSmall = {
+  testProject2: Project = {
     'uid': 'e6f955ze6dd262',
     'name': 'XML-project',
     'teamMembers': ['16511', '654664'],
@@ -23,7 +23,7 @@ export class ProjectService {
   };
 
 
-  testProjectBig: ProjectBig;
+  testProjectBig: Project;
 
   constructor() {
   }
@@ -33,7 +33,7 @@ export class ProjectService {
    *
    * @return array of projects
    * */
-  getAllProjectsTeacher(teacherUUID): ProjectSmall[] {
+  getAllProjectsTeacher(teacherUUID): Project[] {
     return [this.testProject2, this.testProject, this.testProject, this.testProject, this.testProject, this.testProject, this.testProject, this.testProject]
   }
 

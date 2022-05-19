@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../services/project.service";
-import {ProjectBig} from "../models/project";
-import {PrimeIcons} from "primeng/api";
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import {Project} from "../models/project";
+import {faDownload} from '@fortawesome/free-solid-svg-icons';
 import {User} from "../../models/User";
 import {UsersService} from "../../services/users.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-project-detail',
@@ -13,7 +13,7 @@ import {UsersService} from "../../services/users.service";
 })
 export class ProjectDetailComponent implements OnInit {
 
-  project: ProjectBig;
+  project: Project;
 
   display: boolean[] = [];
   newVersionDisplay : boolean = false;
@@ -26,19 +26,23 @@ export class ProjectDetailComponent implements OnInit {
   teamMembers : User[];
 
 
-  constructor(private projectService: ProjectService, private userService: UsersService) {
+  constructor(private projectService: ProjectService, private userService: UsersService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.project = this.projectService.testProjectBig;
 
+    if (!this.project) {
+      this.router.navigate(['projects', 'dashboard'])
+    }
 
     for (let i = 0; i < this.project['versions'].length; i++) {
       this.display.push(false)
     }
 
     this.loadTeamMembersData()
-    console.log('teamMember :' , this.teamMembers)
+
+
   }
 
   onOpenCard(versionNumber: any, index: number) {
