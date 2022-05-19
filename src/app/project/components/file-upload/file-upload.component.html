@@ -1,20 +1,35 @@
 <div id="fileUpload">
-<input type="file" class="file-input"
-       [accept]="requiredFileType"
-       (change)="onFileSelected($event)" #fileUpload>
-
-<div class="file-upload">
+  <!--<input type="file" class="file-input"-->
+  <!--       (change)="selectFile($event)" #fileUpload>-->
+  <!--       [accept]="requiredFileType"-->
 
 
+  <div class="row">
+    <div class="col-8">
+      <label class="btn btn-default p-0">
+        <input type="file" class="file-input"
+               (change)="selectFile($event)" #fileUpload>
+      </label>
+    </div>
 
-  <button mat-mini-fab  class="btn btn-primary upload-btn"
-          (click)="fileUpload.click()">
-    {{fileName || "No file uploaded yet."}}
-    <mat-icon>attach_file</mat-icon>
+    <div class="col-4">
+      <!--      <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">-->
+      <!--        Upload-->
+      <!--      </button>-->
+    </div>
+  </div>
 
-  </button>
+  <div class="file-upload">
 
-</div>
+
+    <button mat-mini-fab class="btn btn-primary upload-btn"
+            (click)="fileUpload.click()">
+      {{fileName || "No file uploaded yet."}}
+      <mat-icon>attach_file</mat-icon>
+
+    </button>
+
+  </div>
 
 <div class="progress w-100">
 
