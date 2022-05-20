@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Project} from "../models/project";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -125,7 +126,7 @@ export class ProjectService {
   }
 
   getAllProjects(uid: string, isStudent: boolean) {
-    this.http.get("localhost:3000/api/projects/").subscribe((res: Project[]) => {
+    this.http.get(`${environment.baseURL}/api/projects/`).subscribe((res: Project[]) => {
       if (isStudent) {
         this.allProjects = res.filter((e) => {
           e.uid = uid
@@ -142,7 +143,7 @@ export class ProjectService {
 
 
   updateProject(p: Project) {
-    this.http.put("localhost:3000/api/projects/", p)
+    this.http.put(`${environment.baseURL}/api/projects/`, p)
   }
 
 
