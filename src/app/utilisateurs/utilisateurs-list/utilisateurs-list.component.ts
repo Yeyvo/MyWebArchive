@@ -40,7 +40,7 @@ export class UtilisateursListComponent implements OnInit {
     // this.utilisateurs$ = this.route.paramMap.pipe(
     //   switchMap(params => {
     //     this.selectedId = parseInt(params.get('email')!, 10);
-    //     return req
+    //     return this.utilisateurs$;
     //   })
     // );
       this.updateTable()

@@ -1,7 +1,7 @@
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UtilisateurService } from '../utilisateurs.service';
 import { Utilisateurs } from '../utilisateurs';
 @Component({
@@ -21,13 +21,17 @@ export class UtilisateursDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    //console.log("uid",this.utilisateur$.forEach)
-    this.utilisateur$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.service.getUtilisateur(params.get('email')!))
-    );
+    this.getUser();
+    // this.utilisateur$ = this.route.paramMap.pipe(
+    //   switchMap((params: ParamMap) =>
+    //     this.service.getUtilisateur(params.get('email')!))
+    // );
   }
-
+  getUser(): void {
+    const id = this.route.snapshot.paramMap.get('uid')!;
+    this.service.getUtilisateurbyuid(id)
+      .subscribe(user => this.utilisateur$ = of(user));
+  }
 
 
 }
