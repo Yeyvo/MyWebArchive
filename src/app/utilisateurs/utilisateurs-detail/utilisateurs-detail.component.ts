@@ -21,6 +21,7 @@ export class UtilisateursDetailComponent implements OnInit {
 
 
   ngOnInit() {
+    //console.log("uid",this.utilisateur$.forEach)
     this.utilisateur$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.service.getUtilisateur(params.get('email')!))

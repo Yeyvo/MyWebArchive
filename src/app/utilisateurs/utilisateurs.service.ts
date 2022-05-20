@@ -34,23 +34,29 @@ export class UtilisateurService {
     );
   }
 
-  /** GET user by id. Will 404 if id not found  */
-  getUtilisateurbyid(id: number | string): Observable<Utilisateurs> {
-    const url = `${this.usersUrl}/${id}`;
-    return this.http.get<Utilisateurs>(url).pipe(
-      tap(_ => this.log(`fetched user id=${id}`)),
-      catchError(this.handleError<Utilisateurs>(`getUser id=${id}`))
-    );
-  }
-/** add get userprojects   */
+  // /** GET user by id. Will 404 if id not found  */
+  // getUtilisateurbyid(id: number | string): Observable<Utilisateurs> {
+  //   const url = `${this.usersUrl}/${id}`;
+  //   return this.http.get<Utilisateurs>(url).pipe(
+  //     tap(_ => this.log(`fetched user id=${id}`)),
+  //     catchError(this.handleError<Utilisateurs>(`getUser id=${id}`))
+  //   );
+  // }
 
   /** GET users from the server */
   getAllUtilisateurs(): Observable<Utilisateurs[]> {
-    return this.http.get<Utilisateurs[]>("http://localhost:3000/api/users/getAll")
-      .pipe(
-        tap(_ => this.log('fetched utilisateurs')),
-        catchError(this.handleError<Utilisateurs[]>('getUsers', []))
-      );
+    // return this.http.get<Utilisateurs[]>("http://localhost:3010/api/users/getAll")
+    //   .pipe(
+    //     tap(_ => this.log('fetched utilisateurs')),
+    //     catchError(this.handleError<Utilisateurs[]>('getUsers', []))
+    //   );
+    return this.http.get(`http://localhost:3000/api/users/getAll`).pipe(map((res:Utilisateurs[])=>{
+    console.log("---------------------------------------------------------------res:", res) ; 
+    return res;
+    }))
+    
+
+
   }
   /** POST: add a new user to the server */
   addUtilisateur(utilisateurs: Utilisateurs): Observable<Utilisateurs> {

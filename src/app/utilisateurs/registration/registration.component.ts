@@ -38,9 +38,11 @@ export class RegistrationComponent {
     formData.append("email", this.angForm.get('email').value);
     if (this.angForm.get('statut').value == 1) {
       formData.append("type", "Professeur");
+      var type = "Professeur";
     }
     else {
       formData.append("type", "Etudiant");
+      var type = "Etudiant";
     }
     formData.append("mle", this.angForm.get('matricule').value);
     formData.append("niveauetudes", this.angForm.get('promotion').value);
@@ -53,11 +55,9 @@ export class RegistrationComponent {
     imageUrl:null,
     mle:this.angForm.get('matricule').value,
     niveauetudes:this.angForm.get('promotion').value,
-    type:this.angForm.get('statut').value,
-    email:this.angForm.get('email').value
-   }
-    
-    ,this.httpOptions).subscribe(
+    type:type,
+    uid:this.angForm.get('email').value
+   }).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     )
