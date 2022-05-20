@@ -21,7 +21,7 @@ export class UtilisateurService {
   };
   curentUser: Utilisateurs = {
     displayName: "Hamza CHAFAKAN",
-    email: "test@test",
+    uid: "test@test",
     imageUrl: "",
     mle: "",
     niveauetudes: "",
@@ -36,10 +36,10 @@ export class UtilisateurService {
     return of(UTIISATEURS);
   }
 
-  // getUtilisateur(email: string) {
+  // getUtilisateur(uid: string) {
   //   return this.getUtilisateurs().pipe(
   //     // (+) before `id` turns the string into a number
-  //     map((utilisateurs: Utilisateurs[]) => utilisateurs.find(Utilisateurs => Utilisateurs.email === email)!)
+  //     map((utilisateurs: Utilisateurs[]) => utilisateurs.find(Utilisateurs => Utilisateurs.uid === uid)!)
   //   );
   // }
 
@@ -79,7 +79,7 @@ export class UtilisateurService {
   /** POST: add a new user to the server */
   addUtilisateur(utilisateurs: Utilisateurs): Observable<Utilisateurs> {
     return this.http.post<Utilisateurs>("http://localhost:3010/api/users/adduser", utilisateurs, this.httpOptions).pipe(
-      tap((newuser: Utilisateurs) => this.log(`added user w/ email=${newuser.email}`)),
+      tap((newuser: Utilisateurs) => this.log(`added user w/ uid=${newuser.uid}`)),
       catchError(this.handleError<Utilisateurs>('addUser'))
     );
   }
@@ -87,17 +87,17 @@ export class UtilisateurService {
   /** PUT: update the user on the server */
   updateUtilisateurs(utilisateurs: Utilisateurs): Observable<any> {
     return this.http.put(this.usersUrl, utilisateurs, this.httpOptions).pipe(
-      tap(_ => this.log(`updated user id=${utilisateurs.email}`)),
+      tap(_ => this.log(`updated user id=${utilisateurs.uid}`)),
       catchError(this.handleError<any>('updateUser'))
     );
   }
 
 
   /** DELETE: delete the user from the server */
-  deleteUtilisateur(email: string): Observable<Utilisateurs> {
-    const url = `${this.usersUrl}/${email}`;
+  deleteUtilisateur(uid: string): Observable<Utilisateurs> {
+    const url = `${this.usersUrl}/${uid}`;
     return this.http.delete<Utilisateurs>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted user email=${email}`)),
+      tap(_ => this.log(`deleted user uid=${uid}`)),
       catchError(this.handleError<Utilisateurs>('deleteUser'))
     );
   }

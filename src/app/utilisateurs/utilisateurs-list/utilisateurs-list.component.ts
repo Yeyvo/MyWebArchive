@@ -37,7 +37,7 @@ export class UtilisateursListComponent implements OnInit {
     this.utilisateurs$ = this.getUtilisateurs()
     // this.utilisateurs$ = this.route.paramMap.pipe(
     //   switchMap(params => {
-    //     this.selectedId = parseInt(params.get('email')!, 10);
+    //     this.selectedId = parseInt(params.get('uid')!, 10);
     //     return this.utilisateurs$;
     //   })
     // );
@@ -87,7 +87,7 @@ export class UtilisateursListComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.email + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.uid + 1}`;
   }
   onOpenAddVersion() {
     this.newVersionDisplay = true

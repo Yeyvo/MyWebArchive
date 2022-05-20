@@ -31,18 +31,18 @@ export class ProjectsDashboardComponent implements OnInit {
 
     this.utilisateursService.getAllStudents().subscribe((res) => {
       this.items = res.map((x) => {
-        return {id: x.email, name: `${x.displayName} (${x.email})`}
+        return {id: x.uid, name: `${x.displayName} (${x.uid})`}
       })
       this.selected.push({
-        id: this.utilisateursService.curentUser.email,
-        name: `${this.utilisateursService.curentUser.displayName} (${this.utilisateursService.curentUser.email})`
+        id: this.utilisateursService.curentUser.uid,
+        name: `${this.utilisateursService.curentUser.displayName} (${this.utilisateursService.curentUser.uid})`
       })
     })
     // this.projects = this.projectService.allProjects;
 
     this.utilisateursService.getAllTeachers().subscribe((res) => {
       this.teachers = res.map((x) => {
-        return {mail: x.email, nom: `${x.displayName} (${x.email})`}
+        return {mail: x.uid, nom: `${x.displayName} (${x.uid})`}
       })
     })
 

@@ -1,5 +1,5 @@
 export interface Utilisateurs {
-    email : string;
+    uid : string;
     displayName: string;
     imageUrl: string;
     mle: string;
