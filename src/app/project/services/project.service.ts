@@ -158,6 +158,12 @@ export class ProjectService {
     this.http.post(`${environment.baseURL}/api/projects/`, p)
   }
 
+  generatePDF() {
+    this.http.get(`${environment.baseURL}/api/projects/rapport`).subscribe(() => {
+      window.open(`${environment.baseURL}/projects.pdf`, "_blank");
+    })
+  }
+
 //
 // constructor(public http: HttpClient) {
 // }
