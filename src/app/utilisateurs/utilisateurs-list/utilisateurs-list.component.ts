@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 import * as XLSX from 'xlsx';
-import { Utilisateurs } from '../utilisateurs';
-import { UtilisateurService } from '../utilisateurs.service';
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import { UTIISATEURS } from "../mock-utilisateurs";
-import { SelectionModel } from "@angular/cdk/collections";
-import { HttpClient } from '@angular/common/http';
+import {Utilisateurs} from '../utilisateurs';
+import {UtilisateurService} from '../utilisateurs.service';
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {UTIISATEURS} from "../mock-utilisateurs";
+import {SelectionModel} from "@angular/cdk/collections";
+import {HttpClient} from '@angular/common/http';
+
 @Component({
   selector: 'app-utilisateurs-list',
   templateUrl: './utilisateurs-list.component.html',
@@ -25,7 +26,7 @@ export class UtilisateursListComponent implements OnInit {
   dataSource = new MatTableDataSource(UTIISATEURS);
   selection = new SelectionModel<Utilisateurs>(true, []);
   @ViewChild(MatPaginator) paginator: MatPaginator;
- 
+
   constructor(
     private UtilisateurService: UtilisateurService,
     private route: ActivatedRoute,
@@ -107,7 +108,7 @@ export class UtilisateursListComponent implements OnInit {
         console.log(this.file);
         this.onUpload();
       }
-    } 
+  }
     // OnClick of button Upload
     onUpload() {
       console.log(this.file);

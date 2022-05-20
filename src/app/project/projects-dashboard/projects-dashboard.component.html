@@ -28,11 +28,11 @@
       <div class="col-sm-6" *ngFor="let project of projects; let i = index">
         <div class="card btn projCard" routerLink="/projects/detailProject" (click)="onLoadProjectData(i)">
           <div class="card-body">
-            <h5 class="card-title">{{project.name}}</h5>
+            <h5 class="card-title">{{project.titre}}</h5>
             <p class="card-text">{{project.description}}</p>
           </div>
           <div class="tags">
-            <div class="badge badge-primary" *ngFor="let tag of project.tags">{{tag}}</div>
+            <div class="badge badge-primary" *ngFor="let tag of project.motscles.motcle">{{tag}}</div>
           </div>
         </div>
       </div>

@@ -30,13 +30,18 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
     this.project = this.projectService.testProjectBig;
+
+
+    console.log('----------------------------------- : ', this.project.versions.version)
 
     if (!this.project) {
       this.router.navigate(['projects', 'dashboard'])
     }
 
-    for (let i = 0; i < this.project['versions'].length; i++) {
+    for (let i = 0; i < this.project.versions.version.length; i++) {
       this.display.push(false)
     }
 
@@ -45,10 +50,10 @@ export class ProjectDetailComponent implements OnInit {
 
   }
 
-  onOpenCard(versionNumber: any, index: number) {
+  onOpenCard(index: number) {
     if (!this.isAlreadyOpened()) {
       this.display[index] = true;
-      this.currentVersion = versionNumber;
+      this.currentVersion = this.project.versions.version[index].uid;
 
     }
   }
@@ -59,7 +64,8 @@ export class ProjectDetailComponent implements OnInit {
 
   addComment(comment: string, index: number) {
     if (this.currentVersion != null) {
-      this.projectService.addComment(this.currentVersion, comment)
+      // this.projectService.addComment(this.currentVersion.ui, comment)
+      this.projectService.addComment(this.currentVersion, comment, this.getUserId())
       this.display[index] = false
 
     }
@@ -80,12 +86,12 @@ export class ProjectDetailComponent implements OnInit {
 
 
   private loadTeamMembersData() {
-    this.teamMembers = this.userService.getUsersDataInArray(this.project.teamMembers)
+    this.teamMembers = this.userService.getUsersDataInArray(this.project.membres.uid)
   }
 
   getUserFromArrayByUIDOrDatabase(uid:string, team : User[]) : User{
-    let res = team.filter(value => value.uid ===uid)[0]
-    if(res === undefined){
+    let res = team.filter(value => value.uid === uid)[0]
+    if (res === undefined) {
       res = this.userService.getuserByUID(uid);
     }
     return res
@@ -93,5 +99,9 @@ export class ProjectDetailComponent implements OnInit {
 
   onOpenAddVersion() {
     this.newVersionDisplay = true
+  }
+
+  getUserId() {
+    return '1';
   }
 }
