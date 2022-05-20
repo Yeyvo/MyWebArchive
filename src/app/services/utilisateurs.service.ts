@@ -36,19 +36,29 @@ export class UtilisateurService {
     return of(UTIISATEURS);
   }
 
-  getUtilisateur(email: string) {
-    return this.getUtilisateurs().pipe(
-      // (+) before `id` turns the string into a number
-      map((utilisateurs: Utilisateurs[]) => utilisateurs.find(Utilisateurs => Utilisateurs.email === email)!)
+  // getUtilisateur(email: string) {
+  //   return this.getUtilisateurs().pipe(
+  //     // (+) before `id` turns the string into a number
+  //     map((utilisateurs: Utilisateurs[]) => utilisateurs.find(Utilisateurs => Utilisateurs.email === email)!)
+  //   );
+  // }
+
+  /** GET hero by id. Will 404 if id not found */
+  getUtilisateurbyuid(uid: string): Observable<Utilisateurs> {
+    const userid ='http://localhost:3000/api/users/id';
+    const url = `${userid}/${uid}`;
+    return this.http.get<Utilisateurs>(url).pipe(
+      tap(_ => this.log(`fetched user uid=${uid}`)),
+      catchError(this.handleError<Utilisateurs>(`getUser uid=${uid}`))
     );
   }
 
   // /** GET user by id. Will 404 if id not found  */
-  // getUtilisateurbyid(id: number | string): Observable<Utilisateurs> {
-  //   const url = `${this.usersUrl}/${id}`;
+  // getUtilisateurbyid(uid:  string): Observable<Utilisateurs> {
+  //   const url = `${http://localhost:3000/api/users/getuser/{uid}}/${id}`;
   //   return this.http.get<Utilisateurs>(url).pipe(
-  //     tap(_ => this.log(`fetched user id=${id}`)),
-  //     catchError(this.handleError<Utilisateurs>(`getUser id=${id}`))
+  //     tap(_ => this.log(`fetched user uid=${uid}`)),
+  //     catchError(this.handleError<Utilisateurs>(`getUser uid=${uid}`))
   //   );
   // }
 
@@ -59,8 +69,7 @@ export class UtilisateurService {
     //     tap(_ => this.log('fetched utilisateurs')),
     //     catchError(this.handleError<Utilisateurs[]>('getUsers', []))
     //   );
-    return this.http.get(`http://localhost:3000/api/users/getAll`).pipe(map((res:Utilisateurs[])=>{
-      console.log("---------------------------------------------------------------res:", res);
+    return this.http.get(`http://localhost:3000/api/users/getAll`).pipe(map((res: Utilisateurs[])=>{
     return res;
     }))
 

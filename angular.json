@@ -30,6 +30,7 @@
 							"src/assets"
 						],
 						"styles": [
+							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 							"./node_modules/bootstrap/dist/css/bootstrap.css",
 							"node_modules/primeicons/primeicons.css",
 							"node_modules/primeng/resources/primeng.css",
@@ -37,7 +38,7 @@
 							"src/styles.scss",
 							"src/assets/scss/black-dashboard.scss",
 							"src/assets/css/nucleo-icons.css",
-							"node_modules/ngx-toastr/toastr.css",
+							"node_modules/ngx-toastr/toastr.css"
 						],
 						"scripts": [
 							"./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
@@ -106,6 +107,7 @@
 							"src/assets"
 						],
 						"styles": [
+							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 							"src/styles.scss",
 							"src/assets/scss/black-dashboard.scss"
 						],

@@ -5,9 +5,9 @@ import { UtilisateursListComponent } from './utilisateurs-list/utilisateurs-list
 
 const utilisateursroutes: Routes = [
   { path: 'utilisateurs', redirectTo: '/userslist' },
-  { path: 'utilisateur/:id', redirectTo: '/userdetail/:id' },
+  { path: 'utilisateur/:uid', redirectTo: '/userdetail/:uid' },
   { path: 'userslist', component: UtilisateursListComponent, data: { animation: 'utilisateurs' } },
-  { path: 'userdetail/:id', component: UtilisateursDetailComponent, data: { animation: 'utilisateur' } }
+  { path: 'userdetail/:uid', component: UtilisateursDetailComponent, data: { animation: 'utilisateur' } }
 
 ];
 
