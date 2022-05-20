@@ -3,24 +3,40 @@
 
   <div class="form-group">
     <!--          <label for="comment"> Commentaire :</label>-->
-    <input class="form-control mb-3" id="projectName" placeholder="Nom de votre Projet">
+    <input class="form-control mb-3" id="projectName" placeholder="Nom de votre Projet" #projectName>
     <ng-select [items]="items"
                bindLabel="name"
                placeholder="ajouter les membres de votre équipe"
                appendTo="body"
                [multiple]="true"
-               [(ngModel)]="selected">
+               [(ngModel)]="selected"
+               class="mb-3">
     </ng-select>
+
+    <mat-form-field appearance="fill" class="mb-3">
+      <mat-label>Choisir votre encadrant</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let teacher of teachers" [value]="teacher.mail">{{teacher.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <input class="form-control mb-3" id="projectDesc" placeholder="entrez une description du projet" #projectDesc>
+
     <!--   TODO :  associate others students to the project and a teacher + add the possibility to change it in project settings -->
   </div>
-  <button type="button" class="btn btn-primary float-end" (click)="onAddProject()">Add</button>
+  <button type="button" class="btn btn-primary float-end" (click)="onAddProject(projectName.value,projectDesc.value)">
+    Add
+  </button>
 </p-dialog>
 
 
 <div class="container d-flex flex-column" id="projectDetail">
   <div>
-    <button (click)="onOpenAddProject()" class="btn btn-primary btn-lg float-end mb-4">ajouter un nouveau Projet
+    <button (click)="onOpenAddProject()" class="btn btn-primary btn-lg float-end  m-4">ajouter un nouveau Projet
     </button>
+    <a href="" target="_blank">
+      <button class="btn btn-primary btn-lg float-end  m-4">Telecharger un rapport</button>
+    </a>
   </div>
 
   <div class="container">

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class AuthService {
 // }
 
   currentUser = {
-    uid : '54451',
-    displayName : "Amine",
+    uid: '1',
+    displayName: "Amine",
     email: "test@test.com",
     isTeacher: false,
     ImageURL: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp",

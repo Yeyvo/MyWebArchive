@@ -1,15 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 import * as XLSX from 'xlsx';
-import { Utilisateurs } from '../utilisateurs';
-import { UtilisateurService } from '../utilisateurs.service';
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import { UTIISATEURS } from "../mock-utilisateurs";
-import { DataSource, SelectionModel } from "@angular/cdk/collections";
-import { HttpClient } from '@angular/common/http';
+import {Utilisateurs} from '../utilisateurs';
+import {UtilisateurService} from '../../services/utilisateurs.service';
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {SelectionModel} from "@angular/cdk/collections";
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -33,7 +31,7 @@ export class UtilisateursListComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient
   ) { }
-  
+
   ngOnInit(): void {
 
     this.utilisateurs$ = this.getUtilisateurs()

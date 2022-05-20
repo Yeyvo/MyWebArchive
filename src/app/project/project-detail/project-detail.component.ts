@@ -35,7 +35,6 @@ export class ProjectDetailComponent implements OnInit {
     this.project = this.projectService.testProjectBig;
 
 
-    console.log('----------------------------------- : ', this.project.versions.version)
 
     if (!this.project) {
       this.router.navigate(['projects', 'dashboard'])
@@ -64,6 +63,7 @@ export class ProjectDetailComponent implements OnInit {
 
   addComment(comment: string, index: number) {
     if (this.currentVersion != null) {
+
       // this.projectService.addComment(this.currentVersion.ui, comment)
       this.projectService.addComment(this.currentVersion, comment, this.getUserId())
       this.display[index] = false
@@ -103,5 +103,9 @@ export class ProjectDetailComponent implements OnInit {
 
   getUserId() {
     return '1';
+  }
+
+  onDownloadRapport() {
+
   }
 }

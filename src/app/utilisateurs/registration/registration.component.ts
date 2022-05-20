@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Utilisateurs } from '../utilisateurs';
-import { UtilisateurService } from '../utilisateurs.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Utilisateurs} from '../utilisateurs';
+import {UtilisateurService} from '../../services/utilisateurs.service';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

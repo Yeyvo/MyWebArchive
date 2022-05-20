@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Project} from "../models/project";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {map} from "rxjs/operators";
 
 
 @Injectable({
@@ -10,7 +11,6 @@ import {environment} from "../../../environments/environment";
 export class ProjectService {
 
 
-  currentProject: Project = null;
 
   allProjects: Project[] = [];
 
@@ -108,35 +108,43 @@ export class ProjectService {
   // }
 
   LoadProjectData(projectId: string) {
-    this.testProjectBig = this.testProject2;
     this.testProjectBig = this.allProjects.find((e) => {
       return e.uid == projectId
     })
-    console.log("##################################", this.allProjects)
   }
 
   addComment(currentVersionId: string, comment: string, userId: string) {
-    this.currentProject.versions.version.find(e => e.uid === currentVersionId)
+
+    this.testProjectBig.versions.version.find(e => e.uid === currentVersionId)
       .comments.comment.push({
       prof: userId,
       contenu: comment
     })
-    this.updateProject(this.currentProject);
+    this.updateProject(this.testProjectBig);
     // console.log(currentVersion, comment)
   }
 
   getAllProjects(uid: string, isStudent: boolean) {
-    this.http.get(`${environment.baseURL}/api/projects/`).subscribe((res: Project[]) => {
+    return this.http.get(`${environment.baseURL}/api/projects/`).pipe(map((res: Project[]) => {
+      console.log('----------------------------------- : ', res)
+      let projs: Project[] = []
       if (isStudent) {
-        this.allProjects = res.filter((e) => {
-          e.uid = uid
+        projs = res.filter((e) => {
+          return e.membres.uid.indexOf(uid) != -1;
         })
+        this.allProjects = projs;
       } else {
-        this.allProjects = res.filter((e) => {
-          e.profId = uid
+        projs = res.filter((e) => {
+          return e.profId == uid;
         })
+        this.allProjects = projs;
       }
-    })
+      return projs
+    }));
+
+    // .subscribe((res: Project[]) => {
+    //
+    // })
 
     // return [this.testProject,this.testProject,this.testProject2];
   }
@@ -146,6 +154,9 @@ export class ProjectService {
     this.http.put(`${environment.baseURL}/api/projects/`, p)
   }
 
+  createProject(p: Project) {
+    this.http.post(`${environment.baseURL}/api/projects/`, p)
+  }
 
 //
 // constructor(public http: HttpClient) {

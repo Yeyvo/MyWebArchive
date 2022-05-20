@@ -36,6 +36,7 @@ import {FormsModule} from "@angular/forms";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {AuthModule} from "@auth0/auth0-angular";
 import {NotConnectedComponent} from './components/not-connected/not-connected.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -79,10 +80,10 @@ import {NotConnectedComponent} from './components/not-connected/not-connected.co
       domain: 'dev--r9nce6d.us.auth0.com',
       clientId: 'wTN0ReH1lBAHMEVkB4FcmSvbeCLFF2pu'
     }),
+    MatSelectModule,
   ],
   providers: [],
-  exports: [
-  ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

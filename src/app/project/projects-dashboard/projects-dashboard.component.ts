@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../services/project.service";
 import {AuthService} from "../../services/auth.service";
 import {Project} from "../models/project";
+import {uuidv4} from "../../helpers/utils.helper";
+import {UtilisateurService} from "../../services/utilisateurs.service";
 
 @Component({
   selector: 'app-projects-dashboard',
@@ -10,31 +12,40 @@ import {Project} from "../models/project";
 })
 export class ProjectsDashboardComponent implements OnInit {
 
-  items = [
-    {id: 1, name: 'Python'},
-    {id: 2, name: 'Node Js'},
-    {id: 3, name: 'Java'},
-    {id: 4, name: 'PHP', disabled: true},
-    {id: 5, name: 'Django'},
-    {id: 6, name: 'Angular'},
-    {id: 7, name: 'Vue'},
-    {id: 8, name: 'ReactJs'},
-  ];
-  selected = [
-    {id: 2, name: 'Node Js'},
-    {id: 8, name: 'ReactJs'}
-  ];
+  teachers = [];
+  items = [];
+  selected = [];
 
 
   projects: Project[];
   newProject: boolean = false;
 
-  constructor(public projectService: ProjectService, private authService: AuthService) {
+  constructor(public projectService: ProjectService, private authService: AuthService, private utilisateursService: UtilisateurService) {
   }
 
   ngOnInit(): void {
-    this.projectService.getAllProjects(this.authService['uuid'], false);
-    this.projects = this.projectService.allProjects;
+    this.projectService.getAllProjects('test@test.com', false).subscribe((res) => {
+      this.projects = res;
+    });
+
+
+    this.utilisateursService.getAllStudents().subscribe((res) => {
+      this.items = res.map((x) => {
+        return {id: x.email, name: `${x.displayName} (${x.email})`}
+      })
+      this.selected.push({
+        id: this.utilisateursService.curentUser.email,
+        name: `${this.utilisateursService.curentUser.displayName} (${this.utilisateursService.curentUser.email})`
+      })
+    })
+    // this.projects = this.projectService.allProjects;
+
+    this.utilisateursService.getAllTeachers().subscribe((res) => {
+      this.teachers = res.map((x) => {
+        return {mail: x.email, nom: `${x.displayName} (${x.email})`}
+      })
+    })
+
   }
 
   onLoadProjectData(i: number) {
@@ -45,7 +56,23 @@ export class ProjectsDashboardComponent implements OnInit {
     this.newProject = true
   }
 
-  onAddProject() {
+  onAddProject(name: string, desc: string,) {
+    // TODO add all data + add form validation
+    let p: Project = {
+      comments: {comment: []},
+      description: desc,
+      membres: {uid: []},
+      motscles: {motcle: []},
+      note: 0,
+      profId: "",
+      status: "",
+      titre: name,
+      type: "",
+      uid: uuidv4(),
+      versions: {version: []}
+
+    }
+    this.projectService.createProject(p);
 
   }
 }

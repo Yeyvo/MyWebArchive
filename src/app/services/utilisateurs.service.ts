@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
 
-import { Utilisateurs } from './utilisateurs';
-import { UTIISATEURS } from './mock-utilisateurs';
-import { MessageService } from './message.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Utilisateurs} from '../utilisateurs/utilisateurs';
+import {UTIISATEURS} from '../utilisateurs/mock-utilisateurs';
+import {MessageService} from '../utilisateurs/message.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,15 @@ export class UtilisateurService {
   private usersUrl = 'api/users';  // URL to web api
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+  curentUser: Utilisateurs = {
+    displayName: "Hamza CHAFAKAN",
+    email: "test@test",
+    imageUrl: "",
+    mle: "",
+    niveauetudes: "",
+    type: ""
   };
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
@@ -51,10 +60,10 @@ export class UtilisateurService {
     //     catchError(this.handleError<Utilisateurs[]>('getUsers', []))
     //   );
     return this.http.get(`http://localhost:3000/api/users/getAll`).pipe(map((res:Utilisateurs[])=>{
-    console.log("---------------------------------------------------------------res:", res) ; 
+      console.log("---------------------------------------------------------------res:", res);
     return res;
     }))
-    
+
 
 
   }
@@ -84,19 +93,39 @@ export class UtilisateurService {
     );
   }
 
+
+  getAllTeachers() {
+    return this.http.get(`${environment.baseURL}/api/users/allProfs`).pipe(map((res: Utilisateurs[]) => {
+      return res
+    }));
+  }
+
+  getAllStudents() {
+    return this.http.get(`${environment.baseURL}/api/users/allStudents`).pipe(map((res: Utilisateurs[]) => {
+      return res
+    }));
+  }
+
+  getUserById(id: string) {
+    return this.http.get(`${environment.baseURL}/api/users/allStudents`).pipe(map((res: Utilisateurs) => {
+      return res
+    }));
+  }
+
+
   /** upload file */
   // Returns an observable
-  upload(file):Observable<Utilisateurs> {
+  upload(file): Observable<Utilisateurs> {
     // Create form data
-    const formData = new FormData(); 
-      
+    const formData = new FormData();
+
     // Store form name as "file" with file data
     formData.append("file", file, file.name);
-      
+
     // Make http post request over api
     // with formData as req
     return this.http.post<Utilisateurs>(this.usersUrl, formData)
-}
+  }
 
   /**
    * Handle Http operation that failed.
@@ -118,6 +147,7 @@ export class UtilisateurService {
       return of(result as T);
     };
   }
+
 
   /** Log a userService message with the MessageService */
   private log(message: string) {

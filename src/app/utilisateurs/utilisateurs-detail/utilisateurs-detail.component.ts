@@ -1,9 +1,10 @@
-import { switchMap } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UtilisateurService } from '../utilisateurs.service';
-import { Utilisateurs } from '../utilisateurs';
+import {switchMap} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {UtilisateurService} from '../../services/utilisateurs.service';
+import {Utilisateurs} from '../utilisateurs';
+
 @Component({
   selector: 'app-utilisateurs-detail',
   templateUrl: './utilisateurs-detail.component.html',

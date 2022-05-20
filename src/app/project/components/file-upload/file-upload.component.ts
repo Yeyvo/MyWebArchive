@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {HttpClient, HttpEventType, HttpResponse} from "@angular/common/http";
 import {FileUploadService} from "../../../services/file-upload.service";
+import {ProjectService} from "../../services/project.service";
 
 @Component({
   selector: 'app-file-upload',
@@ -13,11 +14,13 @@ export class FileUploadComponent implements OnInit {
   @Input()
   requiredFileType: string;
 
+
   fileName = '';
   uploadProgress: number;
   uploadSub: Subscription;
 
-  constructor(private http: HttpClient, private fileuploadService: FileUploadService) {
+
+  constructor(private http: HttpClient, private fileuploadService: FileUploadService, private projectService: ProjectService) {
   }
 
   // onFileSelected(event) {
@@ -106,6 +109,43 @@ export class FileUploadComponent implements OnInit {
   reset() {
     this.uploadProgress = null;
     this.uploadSub = null;
+  }
+
+
+  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;
+  files = [];
+
+
+  @Input()
+  data = {
+    idProjet: "",
+    idVersion: "",
+    filename: "",
+    isConfirmed: false
+  }
+
+
+  private sendFiles() {
+    this.fileUpload.nativeElement.value = '';
+    this.files.forEach(file => {
+      if (this.data.isConfirmed) {
+        this.fileuploadService.sendFile(file, this.data.idProjet, this.data.idVersion, this.data.filename);
+      }
+    });
+  }
+
+  onClick() {
+    const fileUpload = this.fileUpload.nativeElement;
+    fileUpload.onchange = () => {
+      for (let index = 0; index < fileUpload.files.length; index++) {
+        const file = fileUpload.files[index];
+
+        this.files.push({data: file, inProgress: false, progress: 0});
+        this.fileName = this.files[0].data.name;
+      }
+      this.sendFiles();
+    };
+    fileUpload.click();
   }
 
 
