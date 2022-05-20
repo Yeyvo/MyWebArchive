@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../services/project.service";
-import {Project} from "../models/project";
+import {Project, Version} from "../models/project";
 import {faDownload} from '@fortawesome/free-solid-svg-icons';
 import {User} from "../../models/User";
 import {UsersService} from "../../services/users.service";
 import {Router} from "@angular/router";
+import {uuidv4} from "../../helpers/utils.helper";
+import {UtilisateurService} from "../../services/utilisateurs.service";
 
 @Component({
   selector: 'app-project-detail',
@@ -16,24 +18,35 @@ export class ProjectDetailComponent implements OnInit {
   project: Project;
 
   display: boolean[] = [];
-  newVersionDisplay : boolean = false;
+  newVersionDisplay: boolean = false;
 
   currentVersion: string = null;
   test: String = "knqlbksblqbsqbslbc sojsjpsjscnsco";
   src: String = "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp";
   faDownload = faDownload;
 
-  teamMembers : User[];
+  teamMembers: User[];
+
+  id = uuidv4();
+
+  newVersion: Version = {
+    comments: {comment: []},
+    contenu: `${this.id}.pdf`,
+    description: "",
+    numero: "",
+    publisher: this.utilisateurService.curentUser.uid,
+    uid: this.id
+
+  }
 
 
-  constructor(private projectService: ProjectService, private userService: UsersService, private router: Router) {
+  constructor(private projectService: ProjectService, private userService: UsersService, private router: Router, private utilisateurService: UtilisateurService) {
   }
 
   ngOnInit(): void {
 
 
     this.project = this.projectService.testProjectBig;
-
 
 
     if (!this.project) {
@@ -58,7 +71,8 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onAddVersion() {
-
+    this.projectService.testProjectBig.versions.version.push(this.newVersion)
+    // this.projectService.updateProject()
   }
 
   addComment(comment: string, index: number) {

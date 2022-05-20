@@ -31,18 +31,18 @@ export class FileUploadService {
 
   serverUrl: string = "";
 
-  public sendFormData(formData, idProject, idVersion, filename) {
-    return this.http.post<any>(`http://localhost:3000/api/projects/upload?projectid=${idProject}&versionid=${idVersion}&filename=${filename}`, formData, {
+  public sendFormData(formData, filename) {
+    return this.http.post<any>(`http://localhost:3000/api/projects/upload?filename=${filename}`, formData, {
       reportProgress: true,
       observe: 'events'
     });
   }
 
-  sendFile(file, idProject, idVersion, filename) {
+  sendFile(file, filename) {
     const formData = new FormData();
     formData.append('file', file.data);
     file.inProgress = true;
-    this.sendFormData(formData, idProject, idVersion, filename).subscribe((event: any) => {
+    this.sendFormData(formData, filename).subscribe((event: any) => {
       if (typeof (event) === 'object') {
         console.log(event.body);
       }

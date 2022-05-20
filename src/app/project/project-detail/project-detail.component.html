@@ -20,7 +20,7 @@
 
     <div class="form-group">
       <!--          <label for="comment"> Commentaire :</label>-->
-      <app-file-upload class="m-4"></app-file-upload>
+      <app-file-upload class="m-4" [filename]="newVersion.uid"></app-file-upload>
       <input  class="form-control mb-3" id="versionName" placeholder="Entrez un numero de version valide ...">
       <input  class="form-control" id="Description" placeholder="Entrez une description de la version ...">
     </div>

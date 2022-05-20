@@ -160,7 +160,7 @@ export class ProjectService {
 
   generatePDF() {
     this.http.get(`${environment.baseURL}/api/projects/rapport`).subscribe(() => {
-      window.open(`${environment.baseURL}/projects.pdf`, "_blank");
+      window.open(`www.google.com`, "_blank");
     })
   }
 

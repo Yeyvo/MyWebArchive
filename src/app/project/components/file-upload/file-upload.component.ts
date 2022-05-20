@@ -117,21 +117,15 @@ export class FileUploadComponent implements OnInit {
 
 
   @Input()
-  data = {
-    idProjet: "",
-    idVersion: "",
-    filename: "",
-    isConfirmed: false
-  }
+  filename: String = "";
 
 
   private sendFiles() {
     this.fileUpload.nativeElement.value = '';
     this.files.forEach(file => {
-      if (this.data.isConfirmed) {
-        this.fileuploadService.sendFile(file, this.data.idProjet, this.data.idVersion, this.data.filename);
+        this.fileuploadService.sendFile(file, this.filename);
       }
-    });
+    );
   }
 
   onClick() {
