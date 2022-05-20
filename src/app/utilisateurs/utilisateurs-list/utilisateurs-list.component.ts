@@ -21,7 +21,7 @@ export class UtilisateursListComponent implements OnInit {
   users: Utilisateurs[] = [];
   selectedId = 0;
   newVersionDisplay: boolean = false;
-  displayedColumns: string[] = ['displayName', 'email', 'type', 'status', 'details'];
+  displayedColumns: string[] = ['select','displayName', 'email', 'type', 'details'];
   dataSource = new MatTableDataSource(UTIISATEURS);
   selection = new SelectionModel<Utilisateurs>(true, []);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,13 +33,13 @@ export class UtilisateursListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUtilisateurs();
-    // this.utilisateurs$ = this.route.paramMap.pipe(
-    //   switchMap(params => {
-    //     this.selectedId = parseInt(params.get('id')!, 10);
-    //     return this.UtilisateurService.getUtilisateurs();
-    //   })
-    // );
+    //this.getUtilisateurs();
+    this.utilisateurs$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        this.selectedId = parseInt(params.get('id')!, 10);
+        return this.UtilisateurService.getUtilisateurs();
+      })
+    );
   }
 
   getUtilisateurs(): void {

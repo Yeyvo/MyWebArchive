@@ -46,7 +46,7 @@ export class UtilisateurService {
 
   /** GET users from the server */
   getAllUtilisateurs(): Observable<Utilisateurs[]> {
-    return this.http.get<Utilisateurs[]>(this.usersUrl)
+    return this.http.get<Utilisateurs[]>("http://localhost:3000/api/users/getAll")
       .pipe(
         tap(_ => this.log('fetched utilisateurs')),
         catchError(this.handleError<Utilisateurs[]>('getUsers', []))
@@ -54,7 +54,7 @@ export class UtilisateurService {
   }
   /** POST: add a new user to the server */
   addUtilisateur(utilisateurs: Utilisateurs): Observable<Utilisateurs> {
-    return this.http.post<Utilisateurs>(this.usersUrl, utilisateurs, this.httpOptions).pipe(
+    return this.http.post<Utilisateurs>("http://localhost:3010/api/users/adduser", utilisateurs, this.httpOptions).pipe(
       tap((newuser: Utilisateurs) => this.log(`added user w/ email=${newuser.email}`)),
       catchError(this.handleError<Utilisateurs>('addUser'))
     );
@@ -81,7 +81,6 @@ export class UtilisateurService {
   /** upload file */
   // Returns an observable
   upload(file):Observable<Utilisateurs> {
-  
     // Create form data
     const formData = new FormData(); 
       
