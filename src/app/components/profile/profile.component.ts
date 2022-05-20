@@ -20,10 +20,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.currentUser;
     if (this.user.isTeacher) {
-      this.projects = this.projectService.getAllProjectsTeacher(this.user.uid);
+      this.projectService.getAllProjects(this.user.uid, false);
     } else {
-      this.projects = this.projectService.getAllProjectsStudent(this.user.uid);
+      this.projectService.getAllProjects(this.user.uid, true);
     }
+    this.projects = this.projectService.allProjects;
   }
 
   onLoadProjectData(i: number) {

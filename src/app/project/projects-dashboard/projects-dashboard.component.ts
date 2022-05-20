@@ -33,11 +33,12 @@ export class ProjectsDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projects = this.projectService.getAllProjectsTeacher(this.authService['uuid']);
+    this.projectService.getAllProjects(this.authService['uuid'], false);
+    this.projects = this.projectService.allProjects;
   }
 
   onLoadProjectData(i: number) {
-    this.projectService.LoadProjectData(this.projects[i]['uid'])
+    this.projectService.LoadProjectData(this.projects[i].uid)
   }
 
   onOpenAddProject() {

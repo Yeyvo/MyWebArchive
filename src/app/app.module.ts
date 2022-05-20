@@ -31,10 +31,11 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // import { UtilisateursDetailComponent } from './utilisateurs/utilisateurs-detail/utilisateurs-detail.component';
 import {UtilisateursModule} from './utilisateurs/utilisateurs.module';
 import {UtilisateursListComponent} from "./utilisateurs/utilisateurs-list/utilisateurs-list.component";
-import {UtilisateursDetailComponent} from "./utilisateurs/utilisateurs-detail/utilisateurs-detail.component";
 import {DialogModule} from "primeng/dialog";
 import {FormsModule} from "@angular/forms";
 import {NgSelectModule} from "@ng-select/ng-select";
+import {AuthModule} from "@auth0/auth0-angular";
+import {NotConnectedComponent} from './components/not-connected/not-connected.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {NgSelectModule} from "@ng-select/ng-select";
     LoginComponent,
     ProfileComponent,
     UtilisateursListComponent,
+    NotConnectedComponent,
     //UtilisateursDetailComponent,
 
   ],
@@ -72,7 +74,11 @@ import {NgSelectModule} from "@ng-select/ng-select";
     UtilisateursModule,
     DialogModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    AuthModule.forRoot({
+      domain: 'dev--r9nce6d.us.auth0.com',
+      clientId: 'wTN0ReH1lBAHMEVkB4FcmSvbeCLFF2pu'
+    }),
   ],
   providers: [],
   exports: [

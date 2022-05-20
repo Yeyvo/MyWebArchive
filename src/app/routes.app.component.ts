@@ -1,9 +1,8 @@
 import {Routes} from "@angular/router";
-import {ProjectComponent} from "./project/project.component";
-import {ProjectsDashboardComponent} from "./project/projects-dashboard/projects-dashboard.component";
 import {FourOhFourComponent} from "./components/four-oh-four/four-oh-four.component";
 import {ProfileComponent} from "./components/profile/profile.component";
-import {LoginComponent} from "./components/login/login.component";
+import {NotConnectedComponent} from "./components/not-connected/not-connected.component";
+import {AuthGuard} from "@auth0/auth0-angular";
 
 export const appRoutes: Routes = [
   {
@@ -12,8 +11,9 @@ export const appRoutes: Routes = [
   },
 
 
-  {path: 'profile', component: ProfileComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'profile', canActivate: [AuthGuard], component: ProfileComponent},
+  // {path: 'login', component: LoginComponent},
+  {path: 'login', component: NotConnectedComponent},
   {path: '404', component: FourOhFourComponent},
-  {path: '**', redirectTo:'/404'}
+  {path: '**', redirectTo: '/404'}
 ];

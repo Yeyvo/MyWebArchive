@@ -11,6 +11,7 @@ import { UTIISATEURS } from "../mock-utilisateurs";
 import { DataSource, SelectionModel } from "@angular/cdk/collections";
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-utilisateurs-list',
   templateUrl: './utilisateurs-list.component.html',
@@ -26,7 +27,7 @@ export class UtilisateursListComponent implements OnInit {
   displayedColumns: string[] = ['select','displayName', 'email', 'type', 'details'];
   selection = new SelectionModel<Utilisateurs>(true, []);
   @ViewChild(MatPaginator) paginator: MatPaginator;
- 
+
   constructor(
     private UtilisateurService: UtilisateurService,
     private route: ActivatedRoute,
@@ -118,7 +119,7 @@ export class UtilisateursListComponent implements OnInit {
         console.log(this.file);
         this.onUpload();
       }
-    } 
+  }
     // OnClick of button Upload
     onUpload() {
       console.log(this.file);
